@@ -10,7 +10,7 @@ Both Susan in the finance department and Bob in the sales department were both a
 
 ![](DepartmentAccess.png)
 
-Above are the permissions I set to the shared folder for the specific departments
+Above are the permissions I set to the shared folder for the specific departments. This was done through the folder propeties. I set NTFS permissions through the security tab and the relevant permissions where also set through sharing.
 
 ![](FileAccess.png)
 
