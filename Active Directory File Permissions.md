@@ -1,3 +1,5 @@
+# **Active Directory File Permissions**
+
 This project demonstrates Active Directory (AD) file and folder permissions in a small corporate environment. It simulates a realistic scenario where:
 Finance Department has full access to sensitive files.
 Sales Department has read-only access to shared resources.
