@@ -1,64 +1,100 @@
-# Network Diagnostics Script
-# Author: Kieran Nutt
-# Description: Full network and connectivity diagnostics for lab environment.
+=== Network Diagnostics Report ===
+Date: 2025-10-11 10:53
+===================================
 
-# Fixed report path
-$reportPath = "C:\Reports\network_diagnostics_2025-10-11_10-53.txt"
+=== LOCAL NETWORK CONFIGURATION ===
 
-# Hosts and their IPs
-$hosts = @(
-    @{Name="DC"; IP="192.168.1.10"},
-    @{Name="FS"; IP="192.168.1.11"},
-    @{Name="CLIENT"; IP="192.168.1.20"},
-    @{Name="Internet"; IP="8.8.8.8"}
-)
+Windows IP Configuration
 
-# Start report
-"=== Network Diagnostics Report ===" | Tee-Object -FilePath $reportPath
-"Date: 2025-10-11 10:53" | Tee-Object -FilePath $reportPath
-"===================================" | Tee-Object -FilePath $reportPath
-"`n" | Out-File $reportPath -Append
+   Host Name . . . . . . . . . . . . : CLIENT
+   Primary Dns Suffix  . . . . . . . : 
+   Node Type . . . . . . . . . . . . : Hybrid
+   IP Routing Enabled. . . . . . . . : No
+   WINS Proxy Enabled. . . . . . . . : No
 
-# Local network info
-"=== LOCAL NETWORK CONFIGURATION ===" | Tee-Object -FilePath $reportPath
-ipconfig /all | Tee-Object -FilePath $reportPath -Append
-arp -a | Tee-Object -FilePath $reportPath -Append
-netstat -ano | Tee-Object -FilePath $reportPath -Append
-"`n" | Out-File $reportPath -Append
+Ethernet adapter Ethernet:
 
-# Connectivity tests
-foreach ($host in $hosts) {
-    "Host: $($host.Name) ($($host.IP))" | Tee-Object -FilePath $reportPath
-    "-----------------------------------" | Tee-Object -FilePath $reportPath
+   Connection-specific DNS Suffix  . : 
+   Description . . . . . . . . . . . : Intel(R) PRO/1000 MT Desktop Adapter
+   Physical Address. . . . . . . . . : 08-00-27-00-8F-1D
+   DHCP Enabled. . . . . . . . . . . : No
+   Autoconfiguration Enabled . . . . : Yes
+   IPv4 Address. . . . . . . . . . . : 192.168.1.20 (Preferred)
+   Subnet Mask . . . . . . . . . . . : 255.255.255.0
+   DNS Servers . . . . . . . . . . . : 192.168.1.10
+   NetBIOS over Tcpip. . . . . . . . : Enabled
 
-    # Ping Test
-    $ping = Test-Connection -ComputerName $host.IP -Count 2 -ErrorAction SilentlyContinue
-    if ($ping) {
-        "Ping: Success - $($ping[0].ResponseTime)ms avg" | Tee-Object -FilePath $reportPath
-    } else {
-        "Ping: Failed" | Tee-Object -FilePath $reportPath
-    }
+Interface: 192.168.1.20 --- 0xc
+  Internet Address      Physical Address      Type
+  192.168.1.10          08-00-27-71-31-eb     dynamic
+  192.168.1.11          08-00-27-00-8F-1D     dynamic
+  192.168.1.255         ff-ff-ff-ff-ff-ff     static
 
-    # Port Test (3389 as example)
-    $portTest = Test-NetConnection -ComputerName $host.IP -Port 3389 -WarningAction SilentlyContinue
-    if ($portTest.TcpTestSucceeded) {
-        "Port 3389: Open" | Tee-Object -FilePath $reportPath
-    } else {
-        "Port 3389: Closed or filtered" | Tee-Object -FilePath $reportPath
-    }
+Active Connections
 
-    # DNS Test
-    try {
-        $dnsResult = Resolve-DnsName $host.IP -ErrorAction Stop
-        "DNS: $($dnsResult.NameHost)" | Tee-Object -FilePath $reportPath
-    } catch {
-        "DNS: Resolution failed" | Tee-Object -FilePath $reportPath
-    }
+  Proto  Local Address          Foreign Address        State           PID
+  TCP    0.0.0.0:135            0.0.0.0:0              LISTENING       540
+  TCP    0.0.0.0:445            0.0.0.0:0              LISTENING       4
+  TCP    192.168.1.20:139       0.0.0.0:0              LISTENING       4
+  UDP    0.0.0.0:123            *:*                                    8
+  UDP    192.168.1.20:137       *:*                                    4
+  UDP    192.168.1.20:138       *:*                                    4
 
-    # Traceroute
-    "Traceroute:" | Tee-Object -FilePath $reportPath
-    tracert $host.IP | Tee-Object -FilePath $reportPath
-    "`n" | Out-File $reportPath -Append
-}
+-----------------------------------
 
-"Diagnostics complete. Report saved to $reportPath" | Tee-Object -FilePath $reportPath
+Host: DC (192.168.1.10)
+-----------------------------------
+Ping: Success - 0ms avg
+Port 3389: Closed or filtered
+DNS: Resolution failed
+Traceroute:
+
+Tracing route to 192.168.1.10 over a maximum of 30 hops
+
+  1    <1 ms    <1 ms    <1 ms  192.168.1.10 
+
+Trace complete.
+
+Host: FS (192.168.1.11)
+-----------------------------------
+Ping: Success - 1ms avg
+Port 3389: Closed or filtered
+DNS: Resolution failed
+Traceroute:
+
+Tracing route to 192.168.1.11 over a maximum of 30 hops
+
+  1    <1 ms    <1 ms    <1 ms  192.168.1.11 
+
+Trace complete.
+
+Host: CLIENT (192.168.1.20)
+-----------------------------------
+Ping: Success - 0ms avg
+Port 3389: Closed or filtered
+DNS: CLIENT
+Traceroute:
+
+Tracing route to CLIENT [192.168.1.20] over a maximum of 30 hops
+
+  1    <1 ms    <1 ms    <1 ms  CLIENT [192.168.1.20] 
+
+Trace complete.
+
+Host: Internet (8.8.8.8)
+-----------------------------------
+Ping: Failed
+Port 3389: Closed or filtered
+DNS: Resolution failed
+Traceroute:
+
+Tracing route to 8.8.8.8 over a maximum of 30 hops
+
+  1  Transmit error: code 1231
+
+Trace complete.
+
+-------------------------------------------------------------
+- RDP (port 3389) closed — expected for internal-only setup.
+- Diagnostics complete — report saved to C:\Reports\network_diagnostics_2025-10-11_10-53.txt
+=============================================================
