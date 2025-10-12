@@ -1,0 +1,64 @@
+# Network Diagnostics Script
+# Author: Kieran Nutt
+# Description: Full network and connectivity diagnostics for lab environment.
+
+# Fixed report path
+$reportPath = "C:\Reports\network_diagnostics_2025-10-11_10-53.txt"
+
+# Hosts and their IPs
+$hosts = @(
+    @{Name="DC"; IP="192.168.1.10"},
+    @{Name="FS"; IP="192.168.1.11"},
+    @{Name="CLIENT"; IP="192.168.1.20"},
+    @{Name="Internet"; IP="8.8.8.8"}
+)
+
+# Start report
+"=== Network Diagnostics Report ===" | Tee-Object -FilePath $reportPath
+"Date: 2025-10-11 10:53" | Tee-Object -FilePath $reportPath
+"===================================" | Tee-Object -FilePath $reportPath
+"`n" | Out-File $reportPath -Append
+
+# Local network info
+"=== LOCAL NETWORK CONFIGURATION ===" | Tee-Object -FilePath $reportPath
+ipconfig /all | Tee-Object -FilePath $reportPath -Append
+arp -a | Tee-Object -FilePath $reportPath -Append
+netstat -ano | Tee-Object -FilePath $reportPath -Append
+"`n" | Out-File $reportPath -Append
+
+# Connectivity tests
+foreach ($host in $hosts) {
+    "Host: $($host.Name) ($($host.IP))" | Tee-Object -FilePath $reportPath
+    "-----------------------------------" | Tee-Object -FilePath $reportPath
+
+    # Ping Test
+    $ping = Test-Connection -ComputerName $host.IP -Count 2 -ErrorAction SilentlyContinue
+    if ($ping) {
+        "Ping: Success - $($ping[0].ResponseTime)ms avg" | Tee-Object -FilePath $reportPath
+    } else {
+        "Ping: Failed" | Tee-Object -FilePath $reportPath
+    }
+
+    # Port Test (3389 as example)
+    $portTest = Test-NetConnection -ComputerName $host.IP -Port 3389 -WarningAction SilentlyContinue
+    if ($portTest.TcpTestSucceeded) {
+        "Port 3389: Open" | Tee-Object -FilePath $reportPath
+    } else {
+        "Port 3389: Closed or filtered" | Tee-Object -FilePath $reportPath
+    }
+
+    # DNS Test
+    try {
+        $dnsResult = Resolve-DnsName $host.IP -ErrorAction Stop
+        "DNS: $($dnsResult.NameHost)" | Tee-Object -FilePath $reportPath
+    } catch {
+        "DNS: Resolution failed" | Tee-Object -FilePath $reportPath
+    }
+
+    # Traceroute
+    "Traceroute:" | Tee-Object -FilePath $reportPath
+    tracert $host.IP | Tee-Object -FilePath $reportPath
+    "`n" | Out-File $reportPath -Append
+}
+
+"Diagnostics complete. Report saved to $reportPath" | Tee-Object -FilePath $reportPath
