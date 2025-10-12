@@ -97,10 +97,17 @@ Add-Content $reportPath "- Internet connection unavailable (no default gateway).
 Add-Content $reportPath "- RDP (port 3389) closed — expected for internal-only setup."
 Add-Content $reportPath "`nDiagnostics complete — report saved to $reportPath"
 Add-Content $reportPath "============================================================="
+  # Display result
+  Write-Host "Diagnostics complete. Report saved to $reportPath"
+  Start-Process notepad.exe $reportPath
+
+  ```
+</details>
 
 
 
-# Display result
-Write-Host "Diagnostics complete. Report saved to $reportPath"
-Start-Process notepad.exe $reportPath
+
+
+
+## ![Network Diagnostics Script Output](Network_Diagnostics_2025-10-11_10-53.txt)
 
