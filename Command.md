@@ -3,11 +3,11 @@
 This page showcases a collection of network troubleshooting scripts and commands I’ve used. Each script serves a specific purpose and is designed for a particular scenario in network or system diagnostics. logging the results in a structured report. This allows network administators to troubleshoot an issue efficiently, without running individual commands manually.
 
 
-## Network Diagnostics Script
+# Network Diagnostics Script
 
 This Network Diagnostics Script is designed to automate network and connectivity checks within a lab environment. Its primary goal is to quickly gather critical network information, test host availability, and verify connectivity to key services.
 <details>
-  <summary>🧠 View full PowerShell script</summary>
+  <summary> View full PowerShell script</summary>
 
   ```powershell
   # ==========================================================
@@ -111,9 +111,53 @@ Add-Content $reportPath "=======================================================
 
 
 
-## ![Network Diagnostics Script Output](Network_Diagnostics_2025-10-11_10-53.txt)
+#### ![Network Diagnostics Script Output](Network_Diagnostics_2025-10-11_10-53.txt)
 
-## Ports and Services
+
+## Script Functions and Purposes
+### 1. Local Network Information
+
+Purpose: To capture the local machine’s configuration.
+
+Functions Used:
+
+ipconfig /all – displays detailed network adapter settings, IP addresses, DNS configuration, and other interface information.
+
+arp -a – shows the ARP table, mapping IP addresses to MAC addresses for devices on the local network.
+
+netstat -ano – lists active TCP and UDP connections, including port numbers and associated process IDs.
+
+Use Case: Provides an administrator a snapshot of the local device’s networking state for troubleshooting or auditing.
+
+### 2. Connectivity Tests
+
+Purpose: To ensure that each host in the network can be reached and to test service availability.
+
+Functions Used:
+
+Test-Connection – performs a ping test to determine if a host is reachable.
+
+Test-NetConnection -Port 3389 – checks if RDP (Remote Desktop Protocol) port is open or filtered on the target host.
+
+Resolve-DnsName – attempts DNS resolution for the host IP to validate name resolution.
+
+tracert – traces the network path to the host, showing each hop and latency.
+
+Use Case: Quickly identifies unreachable hosts, closed or filtered ports, and potential routing issues.
+
+### 3. Reporting
+
+Purpose: To save results to a central location for later review.
+
+Implementation:
+
+Tee-Object – outputs results to both the console and a file simultaneously.
+
+Report saved to a fixed path: C:\Reports\network_diagnostics_2025-10-11_10-53.txt.
+
+Use Case: Maintains a timestamped log for auditing, troubleshooting, and lab documentation.
+
+# Ports and Services
 
 <details>
 <summary>Port and Service Test Script</summary>
@@ -170,7 +214,49 @@ Start-Process notepad.exe $reportPath
 ```
 </details>
 
+#### Ports and Services Output
 
-AAA
+## Script Functions and Purposes
+
+### 1. Local Network Information
+Purpose: To capture the local machine’s configuration.
+
+Functions Used:
+
+ipconfig /all – displays detailed network adapter settings, IP addresses, DNS configuration, and other interface information.
+
+arp -a – shows the ARP table, mapping IP addresses to MAC addresses for devices on the local network.
+
+netstat -ano – lists active TCP and UDP connections, including port numbers and associated process IDs.
+
+Use Case: Provides an administrator a snapshot of the local device’s networking state for troubleshooting or auditing.
+
+### 2. Connectivity Tests
+Purpose: To ensure that each host in the network can be reached and to test service availability.
+
+Functions Used:
+
+Test-Connection – performs a ping test to determine if a host is reachable.
+
+Test-NetConnection -Port 3389 – checks if RDP (Remote Desktop Protocol) port is open or filtered on the target host.
+
+Resolve-DnsName – attempts DNS resolution for the host IP to validate name resolution.
+
+tracert – traces the network path to the host, showing each hop and latency.
+
+Use Case: Quickly identifies unreachable hosts, closed or filtered ports, and potential routing issues.
+
+### 3. Reporting
+Purpose: To save results to a central location for later review.
+
+Implementation:
+
+Tee-Object – outputs results to both the console and a file simultaneously.
+
+Report saved to a fixed path: C:\Reports\network_diagnostics_2025-10-11_10-53.txt.
+
+Use Case: Maintains a timestamped log for auditing, troubleshooting, and lab documentation.
+
+
 
 
