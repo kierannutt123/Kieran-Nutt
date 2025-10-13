@@ -159,6 +159,8 @@ Use Case: Maintains a timestamped log for auditing, troubleshooting, and lab doc
 
 # Ports and Services
 
+This PowerShell script tests the accessibility of common network ports across specified hosts to determine which services are open, closed, or filtered. It is designed for use in a controlled lab or troubleshooting environment where administrators need to verify network reachability or service availability. In this particular case, the test was performed within an isolated virtual environment using Host Only networking, which explains why all ports appeared closed or filtered as the setup intentionally restricts external communication for security and containment. In a real world network, however, the same script would highlight active services such as RDP 3389, HTTP 80, or SMB 445, helping identify which systems are reachable and which may be blocked by firewall or configuration rules.
+
 <details>
 <summary>Port and Service Test Script</summary>
 
@@ -214,7 +216,8 @@ Start-Process notepad.exe $reportPath
 ```
 </details>
 
-#### Ports and Services Output
+#### ![Ports and Services Output](Ports_and_Services_Output)
+
 
 ## Script Functions and Purposes
 
