@@ -6,13 +6,14 @@ This repository showcases the projects I’ve built while developing skills in I
 
 ## Troubleshooting Scripts and Commands
 
-Network Troubleshooting
+[Network Troubleshooting](https://github.com/kierannutt123/Kieran-Nutt/blob/main/Command.md)
 
 
 ## Active Directory
 
 Group Policies
-File Sharing and Permissions
+
+[File Sharing and Permissions](https://github.com/kierannutt123/Kieran-Nutt/blob/main/Active%20Directory%20File%20Permissions.md)
 
 
 
