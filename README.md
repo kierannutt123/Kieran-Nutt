@@ -13,7 +13,7 @@ This repository showcases the projects I’ve built while developing skills in I
 
 [Group Policies](https://github.com/kierannutt123/Kieran-Nutt/new/main)
 
-[File Sharing and Permissions](https://github.com/kierannutt123/Kieran-Nutt/blob/main/Active%20Directory%20File%20Permissions.md)
+[File Sharing and Permissions](https://github.com/kierannutt123/ActiveDirectoryFilePermissions/blob/main/Active%20Directory%20File%20Permissions.md)
 
 
 
