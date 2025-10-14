@@ -4,16 +4,15 @@
 
 This repository showcases the projects I’ve built while developing skills in IT support, networking, and system administration. Each project is designed to reflect real-world tasks an IT professional might handle, from setting up file servers to configuring Active Directory.
 
-## Log Analytics, Security Monitotoring, and Threat Hunting
+## Troubleshooting Scripts and Commands
+
+Network Troubleshooting
 
 
-[Threat Hunting (Tor)](https://github.com/kieran1234n/Threat-Hunting)
+## Active Directory
 
-[Azure Logs Analysis]( https://github.com/kieran1234n/Microsoft-Azure-Sandbox-Environment)
-
-[Network Security Logs Analysis]( https://github.com/kieran1234n/Network-Security-Log)
-
-[System logs Analysis]( https://github.com/kieran1234n/System-log-analysis-with-Infected-users)
+Group Policies
+File Sharing and Permissions
 
 
 
