@@ -11,7 +11,7 @@ This repository showcases the projects I’ve built while developing skills in I
 
 ## Active Directory
 
-[Group Policies](https://github.com/kierannutt123/Kieran-Nutt/new/main)
+[Group Policies](https://github.com/kierannutt123/Group-Policies/blob/main/Group%20Policies.md)
 
 [File Sharing and Permissions](https://github.com/kierannutt123/ActiveDirectoryFilePermissions/blob/main/Active%20Directory%20File%20Permissions.md)
 
