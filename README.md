@@ -6,7 +6,7 @@ This repository showcases the projects I’ve built while developing skills in I
 
 ## Troubleshooting Scripts and Commands
 
-[Network Troubleshooting](https://github.com/kierannutt123/Network-Commands)
+[Network Troubleshooting](https://github.com/kierannutt123/Network-Commands/blob/main/.md)
 
 
 ## Active Directory
