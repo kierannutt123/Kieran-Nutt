@@ -7,7 +7,7 @@ This repository showcases the projects I’ve built while developing skills in I
 
 ## Helpdesk Opperations
 
-[Zendesk](https://github.com/kierannutt123/Group-Policies/blob/main/Group%20Policies.md)
+[Zendesk](https://github.com/kierannutt123/IT-Support-Case-Management-in-Zendesk/blob/main/IT-Support-Case-Management-in-Zendesk.md)
 
 ## Troubleshooting Scripts and Commands
 
